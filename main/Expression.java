@@ -66,6 +66,13 @@ public abstract class Expression {
         }
         return e;
     }
+    
+    public static double gaussUncertainty(Expression e, Parameter[] params) {
+        double sum = 0;
+        for (int i = 0; i < params.length; i++)
+            sum += Math.pow(e.derivative(params[i]).eval() * params[i].getUncertainty(), 2);
+        return Math.sqrt(sum);
+    }
 
     protected abstract String getConcatSymbol();
 
@@ -87,12 +94,5 @@ public abstract class Expression {
         String str1 = parentheses[0] + child1.toString() + parentheses[1],
                 str2 = parentheses[2] + child2.toString() + parentheses[3];
         return str1 + " " + getConcatSymbol() + " " + str2;
-    }
-
-    public static double gaussUncertainty(Expression e, Parameter[] params) {
-        double sum = 0;
-        for (int i = 0; i < params.length; i++)
-            sum += Math.pow(e.derivative(params[i]).eval() * params[i].getUncertainty(), 2);
-        return Math.sqrt(sum);
     }
 }
