@@ -1,12 +1,19 @@
 package main;
 
-public class Main {
+public class ROT {
 
     public static void main(String[] args) {
-        // proportionalitaetskonstanteK();
-        // traegheitsradiusR();
-        // traegheitsMomenteSchwingung();
-        // traegheitsMomenteGroesseQuader();
+        
+    }
+    
+    private static void traegheitsradiusSteigung() {
+        Parameter a = new Parameter(0.00581, "a", 0.00006), g = new Parameter(9.81, "g"),
+                r = new Parameter(0.0045, "r", 0.0005);
+        Expression y = new Product(g, new Power(new Product(new Constant(8), a), -1));
+        Expression rj = new Product(r, new Power(new Sum(y, new Constant(-1)), 0.5));
+        var params = new Parameter[] { a, r };
+        System.out.println("rj = " + rj.eval());
+        System.out.println("delta rj = " + Expression.gaussUncertainty(rj, params));
     }
 
     private static void traegheitsMomenteGroesseQuader() {
@@ -39,11 +46,11 @@ public class Main {
     }
 
     public static void traegheitsradiusR() {
-        Parameter r1 = new Parameter(0.0045, "r1", 0.0005), r2 = new Parameter(0.006, "r2", 0.0005),
-                r3 = new Parameter(0.0075, "r3", 0.001), r4 = new Parameter(0.063, "r4", 0.0045),
-                r5 = new Parameter(0.085, "r5", 0.004), l1 = new Parameter(0.1415, "l1", 0.0025),
-                l2 = new Parameter(0.0625, "l2", 0.0025), l3 = new Parameter(0.0065, "l3", 0.001),
-                l4 = new Parameter(0.0035, "l4", 0.0015);
+        Parameter r1 = new Parameter(0.0065, "r1", 0.001), r2 = new Parameter(0.0035, "r2", 0.0015),
+                r3 = new Parameter(0.0065, "r3", 0.002), r4 = new Parameter(0.0625, "r4", 0.0025),
+                r5 = new Parameter(0.1415, "r5", 0.0025), l1 = new Parameter(0.085, "l1", 0.004),
+                l2 = new Parameter(0.063, "l2", 0.0045), l3 = new Parameter(0.006, "l3", 0.0005),
+                l4 = new Parameter(0.0045, "l4", 0.0005);
         Expression num1 = new Product(l1, new Power(r1, 4));
         Expression num2 = new Product(l2, new Sum(new Power(r2, 4), new Product(new Constant(-1), new Power(r1, 4))));
         Expression num3 = new Product(l3, new Sum(new Power(r3, 4), new Product(new Constant(-1), new Power(r2, 4))));
