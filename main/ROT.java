@@ -1,10 +1,6 @@
 package main;
 
 public class ROT {
-
-    public static void main(String[] args) {
-        
-    }
     
     private static void traegheitsradiusSteigung() {
         Parameter a = new Parameter(0.00581, "a", 0.00006), g = new Parameter(9.81, "g"),
@@ -13,7 +9,7 @@ public class ROT {
         Expression rj = new Product(r, new Power(new Sum(y, new Constant(-1)), 0.5));
         var params = new Parameter[] { a, r };
         System.out.println("rj = " + rj.eval());
-        System.out.println("delta rj = " + Expression.gaussUncertainty(rj, params));
+        System.out.println("delta rj = " + rj.gaussUncertainty(params));
     }
 
     private static void traegheitsMomenteGroesseQuader() {
@@ -27,9 +23,9 @@ public class ROT {
                 new Product(m, new Sum(new Power(lx, 2), new Power(ly, 2))));
         var params = new Parameter[] { m, lx, ly, lz };
         System.out.println("jx = " + jx.eval());
-        System.out.println("delta jx = " + Expression.gaussUncertainty(jx, params));
-        System.out.println("delta jy = " + Expression.gaussUncertainty(jy, params));
-        System.out.println("delta jz = " + Expression.gaussUncertainty(jz, params));
+        System.out.println("delta jx = " + jx.gaussUncertainty(params));
+        System.out.println("delta jy = " + jy.gaussUncertainty(params));
+        System.out.println("delta jz = " + jz.gaussUncertainty(params));
     }
 
     public static void traegheitsMomenteSchwingung() {
@@ -39,10 +35,10 @@ public class ROT {
         Expression jx = new Product(k, new Power(tx, 2)), jy = new Product(k, new Power(ty, 2)),
                 jz = new Product(k, new Power(tz, 2)), jd = new Product(k, new Power(td, 2));
         System.out.println("jx = " + jx.eval());
-        System.out.println("delta jx = " + Expression.gaussUncertainty(jx, new Parameter[] { k, tx }));
-        System.out.println("delta jy = " + Expression.gaussUncertainty(jy, new Parameter[] { k, ty }));
-        System.out.println("delta jz = " + Expression.gaussUncertainty(jz, new Parameter[] { k, tz }));
-        System.out.println("delta jd = " + Expression.gaussUncertainty(jd, new Parameter[] { k, td }));
+        System.out.println("delta jx = " + jx.gaussUncertainty(new Parameter[] { k, tx }));
+        System.out.println("delta jy = " + jy.gaussUncertainty(new Parameter[] { k, ty }));
+        System.out.println("delta jz = " + jz.gaussUncertainty(new Parameter[] { k, tz }));
+        System.out.println("delta jd = " + jd.gaussUncertainty(new Parameter[] { k, td }));
     }
 
     public static void traegheitsradiusR() {
@@ -67,7 +63,7 @@ public class ROT {
         Expression rj = new Power(new Product(new Constant(0.5), frac), 0.5);
         var params = new Parameter[] { r1, r2, r3, r4, r5, l1, l2, l3, l4 };
         System.out.println("rj = " + rj.eval());
-        System.out.println("delta rj = " + Expression.gaussUncertainty(rj, params));
+        System.out.println("delta rj = " + rj.gaussUncertainty(params));
     }
 
     public static void proportionalitaetskonstanteK() {
@@ -76,7 +72,7 @@ public class ROT {
         Expression num = new Product(m, new Power(r, 2));
         Expression den = new Product(new Constant(2), new Power(t, 2));
         Expression k = new Product(num, new Power(den, -1));
-        // System.out.println("k = " + k.eval());
-        System.out.println("delta k = " + Expression.gaussUncertainty(k, new Parameter[] { m, r, t }));
+        System.out.println("k = " + k.eval());
+        System.out.println("delta k = " + k.gaussUncertainty(new Parameter[] { m, r, t }));
     }
 }
