@@ -67,10 +67,10 @@ public abstract class Expression {
         return e;
     }
     
-    public static double gaussUncertainty(Expression e, Parameter[] params) {
+    public double gaussUncertainty(Parameter[] params) {
         double sum = 0;
         for (int i = 0; i < params.length; i++)
-            sum += Math.pow(e.derivative(params[i]).eval() * params[i].getUncertainty(), 2);
+            sum += Math.pow(derivative(params[i]).eval() * params[i].getUncertainty(), 2);
         return Math.sqrt(sum);
     }
 
