@@ -2,10 +2,6 @@ package main;
 
 public class GFP {
     
-    public static void main(String[] args) {
-        tv3();
-    }
-    
     public static void tv3() {
         System.out.println("1. Messung:");
         direkteBerechnung(0.22, 0.005, 0.94, 0.01);
