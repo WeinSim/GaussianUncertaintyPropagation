@@ -2,13 +2,13 @@ package main;
 
 public class STW {
     
-    public static void main(String[] args) {
-        tv1V();
-        tv1Vl();
-        tv1Gamma();
-        
-        tv3();
-    }
+    // public static void main(String[] args) {
+    //     tv1V();
+    //     tv1Vl();
+    //     tv1Gamma();
+    //     
+    //     tv3();
+    // }
     
     public static void tv3() {
         Parameter v = new Parameter(352.2, "v", 2.1), a = new Parameter(326.4091, "a", 0.0027);
